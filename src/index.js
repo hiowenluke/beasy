@@ -18,12 +18,14 @@ const me = {
 	},
 
 	verify() {
-		const count = this.count;
+		let count = this.count;
 		if (count < this.maxTimes) {
 			return;
 		}
 
 		clearInterval(this.handler);
+
+		count --;
 
 		const endTime = new Date().getTime();
 		const during = (endTime - this.startTime) / 1000;
