@@ -10,7 +10,7 @@ const be = require('benchmark-easy')();
 const times = 1000000;
 
 const main = async () => {
-	// do something
+    // do something
 };
 
 be.start(main, times);
