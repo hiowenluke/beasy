@@ -12,7 +12,7 @@ const me = {
 
 		this.handler = setInterval(() => {this.verify()}, 1);
 
-		while(++ this.count < maxTimes) {
+		while(++ this.count <= maxTimes) {
 			await func(this.count);
 		}
 	},
