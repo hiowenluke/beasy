@@ -3,6 +3,12 @@
 
 An easy tools for benchmark testing of [Node.js](https://nodejs.org).
 
+## Installation
+
+```sh
+npm install benchmark-easy --save
+```
+
 ## Usage
 
 ```js
