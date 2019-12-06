@@ -16,6 +16,7 @@ const me = {
 		const during = (endTime - startTime) / 1000;
 		const avg = Math.floor(maxTimes / during);
 		console.log(`Done. ${maxTimes} times, ${during} seconds, ${avg}/s`);
+		process.exit();
 	}
 };
 
