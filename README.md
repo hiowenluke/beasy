@@ -24,8 +24,8 @@ be.start(main, times);
 
 The result will be like below:
 ```
-Starting...
-Done. 1000000 times, 0.221 seconds, 4524886 times/sec
+Benchmark [1000000] times starting...
+Done. 0.221 seconds, 4524886 times/sec.
 ```
 
 ## License
