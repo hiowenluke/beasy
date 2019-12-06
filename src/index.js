@@ -1,13 +1,15 @@
 
+const runTimes = 100;
+
 const me = {
-	async start(func, maxTimes, numberOfProcesses = 10, runTimes = 100) {
-		console.log(`Benchmark [${maxTimes}] times [${numberOfProcesses}] processes.\nStarting...`);
+	async start(func, maxTimes) {
+		console.log(`Benchmark [${maxTimes}] times.\nStarting...`);
 
 		const duringArr = [];
 		const rateArr = [];
 
 		for (let i = 0; i < runTimes; i ++) {
-			const result = await this.runOnce(func, maxTimes, numberOfProcesses);
+			const result = await this.runOnce(func, maxTimes);
 			const {during, rate} = result;
 			console.log(`Run #${i + 1}: ${during} seconds, ${rate} times/sec.`);
 
@@ -22,33 +24,22 @@ const me = {
 		process.exit();
 	},
 
-	async runOnce(func, maxTimes, numberOfProcesses) {
+	async runOnce(func, maxTimes) {
 		let startTime;
-		const averageTimes = Math.floor(maxTimes / numberOfProcesses);
+		const averageTimes = maxTimes;
 
 		const run = async () => {
-			const promises = [];
+			return new Promise(async resolve => {
+				setTimeout(async () => {
+					startTime = new Date().getTime();
 
-			for (let i = 0; i < numberOfProcesses; i ++) {
-				const p = new Promise(async resolve => {
-					setTimeout(async () => {
-						startTime = new Date().getTime();
+					let count = 0;
+					while (++count <= averageTimes) {
+						await func(count);
+					}
 
-						let count = 0;
-						while(++ count <= averageTimes) {
-							await func(count);
-						}
-
-						resolve();
-					}, 10);
-				});
-				promises.push(p);
-			}
-
-			return new Promise(resolve => {
-				Promise.all(promises).then(values => {
 					resolve();
-				});
+				}, 10);
 			});
 		};
 
