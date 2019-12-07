@@ -1,15 +1,13 @@
 
-const runTimes = 100;
-
 const me = {
-	async start(func, maxTimes) {
-		console.log(`Benchmark [${maxTimes}] times.\nStarting...`);
+	async start(func, times = 100, runs = 10) {
+		console.log(`Benchmark [${times}] times [${runs}] runs.\nStarting...`);
 
 		const duringArr = [];
 		const rateArr = [];
 
-		for (let i = 0; i < runTimes; i ++) {
-			const result = await this.runOnce(func, maxTimes);
+		for (let i = 0; i < runs; i ++) {
+			const result = await this.runOnce(func, times);
 			const {during, rate} = result;
 			console.log(`Run #${i + 1}: ${during} seconds, ${rate} times/sec.`);
 
@@ -24,30 +22,26 @@ const me = {
 		process.exit();
 	},
 
-	async runOnce(func, maxTimes) {
-		let startTime;
-		const averageTimes = maxTimes;
+	async runOnce(func, times) {
+		const startTime = new Date().getTime();
 
 		const run = async () => {
 			return new Promise(async resolve => {
-				setTimeout(async () => {
-					startTime = new Date().getTime();
 
-					let count = 0;
-					while (++count <= averageTimes) {
-						await func(count);
-					}
+				let count = 0;
+				while (++count <= times) {
+					await func(count);
+				}
 
-					resolve();
-				}, 10);
+				resolve();
 			});
 		};
 
 		await run();
 
 		const endTime = new Date().getTime();
-		const during = (endTime - startTime) / 1000;
-		const rate = Math.floor(maxTimes / during);
+		const during = (endTime - startTime) / 1000 || 1;
+		const rate = Math.floor(times / during);
 
 		return {during, rate};
 	}
