@@ -1,7 +1,7 @@
 
 const me = {
 	async start(func, times = 100, runs = 10) {
-		console.log(`Benchmark [${times}] times [${runs}] runs.\nStarting...`);
+		console.log(`Benchmarking [${times}] times, [${runs}] runs.\nStarting...`);
 
 		const duringArr = [];
 		const rateArr = [];
@@ -27,7 +27,6 @@ const me = {
 
 		const run = async () => {
 			return new Promise(async resolve => {
-
 				let count = 0;
 				while (++count <= times) {
 					await func(count);
