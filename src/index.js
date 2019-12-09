@@ -1,6 +1,43 @@
 
+const exec = require('child_process').exec;
+const caller = require('caller');
+const path = require('path');
+
+let isDidBefore;
+
+const wait = async (ms = 1000) => {
+	return new Promise(resolve => {
+		setTimeout(() => {
+			resolve();
+		}, ms);
+	});
+};
+
 const me = {
+	before(...scripts) {
+		if (!scripts.length) return;
+		console.log(`Running scripts...`);
+
+		const pathToCaller = caller();
+		const root = path.resolve(pathToCaller, '..');
+
+		for (let i = 0; i < scripts.length; i ++) {
+			const script = scripts[i];
+			const filePath = script.substr(0, 1) === '/' ? script : root + '/' + script;
+
+			setTimeout(() => {
+				exec(`node ${filePath}`);
+			}, 10);
+		}
+
+		isDidBefore = 1;
+	},
+
 	async start(func, times = 100, runs = 10) {
+
+		// Waiting for the scripts starting
+		isDidBefore && await wait();
+
 		console.log(`Benchmarking [${times}] times, [${runs}] runs.\nStarting...`);
 
 		const duringArr = [];
