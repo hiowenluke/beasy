@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/hiowenluke/benchmark-easy/issues"
   },
-  "homepage": "https://github.com/hiowenluke/benchmark-easy#readme"
+  "homepage": "https://github.com/hiowenluke/benchmark-easy#readme",
+  "dependencies": {
+    "caller": "^1.0.1"
+  }
 }
