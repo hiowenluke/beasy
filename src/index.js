@@ -66,7 +66,7 @@ const me = {
 			return new Promise(async resolve => {
 				let count = 0;
 				while (++count <= times) {
-					await func(count);
+					await func(times, count);
 				}
 
 				resolve();

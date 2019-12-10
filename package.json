@@ -1,6 +1,6 @@
 {
   "name": "benchmark-easy",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "An easy tools for benchmark testing of Node.js",
   "main": "index.js",
   "scripts": {
