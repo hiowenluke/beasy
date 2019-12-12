@@ -13,7 +13,7 @@ npm install benchmark-easy --save
 
 ### .start()
 
-See [example](./benchmark/rpc-frameworks/dooms/index.js) to learn more.
+See [example](./benchmark/rpc-frameworks/booms/index.js) to learn more.
 
 ```js
 const be = require('benchmark-easy')();
@@ -47,7 +47,7 @@ Average: 0.27 seconds, 4144819 times/sec.
 
 ### .before()
 
-Run some script(s) before do .start(). See [example](./benchmark/rpc-frameworks/dooms/index.js) to learn more.
+Run some script(s) before do .start(). See [example](./benchmark/rpc-frameworks/booms/index.js) to learn more.
 
 ```js
 // Run a script
@@ -74,9 +74,9 @@ const times = 1000;
 
 be.compare([
 	{
-		name: 'dooms',
-		before: './dooms/service',
-		start: './dooms/client',
+		name: 'booms',
+		before: './booms/service',
+		start: './booms/client',
 	},
 
 	{
@@ -107,7 +107,7 @@ Results
 Results
 ========================================
 gRPC-node 2844 times/sec
-dooms     2684 times/sec
+booms     2684 times/sec
 dnode     792  times/sec
 socket.io 786  times/sec
 ========================================
@@ -125,7 +125,7 @@ node ./benchmark/rpc-frameworks
 Results
 ========================================
 gRPC-node 2844 times/sec
-dooms     2684 times/sec
+booms     2684 times/sec
 dnode     792  times/sec
 socket.io 786  times/sec
 ========================================
