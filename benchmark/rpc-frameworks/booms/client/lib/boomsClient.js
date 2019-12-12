@@ -5,5 +5,5 @@ const options = {
 	}
 };
 
-const services = require('dooms').initClient(options);
+const services = require('booms').initClient(options);
 module.exports = services;

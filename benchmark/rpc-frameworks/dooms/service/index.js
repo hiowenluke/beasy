@@ -1,2 +1,0 @@
-
-require('dooms').initService('sb');

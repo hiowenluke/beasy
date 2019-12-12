@@ -1,6 +1,6 @@
 
 const fn = async () => {
-	return `Dooms benchmark`;
+	return `Booms benchmark`;
 };
 
 module.exports = fn;

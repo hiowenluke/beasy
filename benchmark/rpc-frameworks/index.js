@@ -3,9 +3,9 @@ const be = require('../..')();
 
 be.compare([
 	{
-		name: 'dooms',
-		before: './dooms/service',
-		start: './dooms/client',
+		name: 'booms',
+		before: './booms/service',
+		start: './booms/client',
 	},
 
 	{
