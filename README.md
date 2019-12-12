@@ -13,6 +13,8 @@ npm install benchmark-easy --save
 
 ### .start()
 
+See [example](./benchmark/rpc-frameworks/dooms/index.js) to learn more.
+
 ```js
 const be = require('benchmark-easy')();
 const times = 1000000;
@@ -45,7 +47,7 @@ Average: 0.27 seconds, 4144819 times/sec.
 
 ### .before()
 
-Run some script(s) before do .start().
+Run some script(s) before do .start(). See [example](./benchmark/rpc-frameworks/dooms/index.js) to learn more.
 
 ```js
 // Run a script
@@ -61,6 +63,74 @@ be.before(
 );
 be.start(...);
 ```
+
+### .compare()
+
+See [example](./benchmark/rpc-frameworks/index.js) to learn more.
+
+```js
+const be = require('benchmark-easy')();
+const times = 1000;
+
+be.compare([
+	{
+		name: 'dooms',
+		before: './dooms/service',
+		start: './dooms/client',
+	},
+
+	{
+		name: 'gRPC-node',
+		before: './gRPC-node/greeter_server',
+		start: './gRPC-node/greeter_client',
+	},
+
+	{
+		name: 'socket.io',
+		before: './socket.io/server',
+		start: './socket.io/client',
+	},
+
+	{
+		name: 'dnode',
+		before: './dnode/server',
+		start: './dnode/client',
+	}
+
+], times);
+```
+
+Results
+```sh
+...
+========================================
+Results
+========================================
+gRPC-node 2844 times/sec
+dooms     2684 times/sec
+dnode     792  times/sec
+socket.io 786  times/sec
+========================================
+```
+
+## Frameworks PK
+
+RPC frameworks
+
+```sh
+node ./benchmark/rpc-frameworks
+
+...
+========================================
+Results
+========================================
+gRPC-node 2844 times/sec
+dooms     2684 times/sec
+dnode     792  times/sec
+socket.io 786  times/sec
+========================================
+```
+
 
 ## License
 
