@@ -9,7 +9,7 @@ let cps = [];
 let isDidBefore;
 let isCompare;
 
-const wait = async (ms = 1000) => {
+const wait = (ms = 1000) => {
 	return new Promise(resolve => {
 		setTimeout(() => {
 			resolve();
@@ -107,8 +107,9 @@ const me = {
 
 			const result = await this.start(fn, times, runs);
 			result.name = name;
-
 			results.push(result);
+
+			await wait(1000);
 		}
 
 		results.sort(compare("avgRate"));
@@ -130,10 +131,8 @@ const me = {
 			const script = scripts[i];
 			const filePath = script.substr(0, 1) === '/' ? script : root + '/' + script;
 
-			setTimeout(() => {
-				const cp = spawn('node', [filePath]);
-				cps.push(cp);
-			}, 10);
+			const cp = spawn('node', [filePath]);
+			cps.push(cp);
 		}
 
 		isDidBefore = 1;
