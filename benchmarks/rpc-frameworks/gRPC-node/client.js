@@ -35,14 +35,15 @@ var client = new hello_proto.Greeter('localhost:50051', grpc.credentials.createI
 async function sayHello (username = 'world') {
 	return new Promise(resolve => {
 		client.sayHello({name: username}, function(err, response) {
-			resolve('Greeting: ' + response.message);
+			resolve(response.message);
 		});
 	})
 }
 
 async function main() {
 	const result = await sayHello();
-	// console.log(result);
+	// console.log('Greeting:', result);
 }
 
 module.exports = main;
+// main();

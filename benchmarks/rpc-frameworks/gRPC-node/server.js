@@ -46,6 +46,7 @@ function main() {
   server.addService(hello_proto.Greeter.service, {sayHello: sayHello});
   server.bind('0.0.0.0:50051', grpc.ServerCredentials.createInsecure());
   server.start();
+  console.log(`Service is running on port 50051...`);
 }
 
 main();

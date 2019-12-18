@@ -2,13 +2,10 @@
 const io = require('socket.io')();
 
 io.on('connection', client => {
-
-	client.on('sayHi', (a1, a2) => {
-		const result = a1 + ' ' + a2;
-		client.emit('sayHi:ok', result);
+	client.on('sayHello', (username = 'world') => {
+		client.emit('sayHello:ok', 'Hello ' + username);
 	});
-
-	client.on('disconnect', () => { /* … */ });
 });
 
 io.listen(3000);
+console.log(`Service is running on port 3000...`);

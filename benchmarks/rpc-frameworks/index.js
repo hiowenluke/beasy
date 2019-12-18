@@ -4,14 +4,14 @@ const be = require('../..')();
 be.compare([
 	{
 		name: 'booms',
-		before: './booms/service',
+		before: './booms/server',
 		start: './booms/client',
 	},
 
 	{
 		name: 'gRPC-node',
-		before: './gRPC-node/greeter_server',
-		start: './gRPC-node/greeter_client',
+		before: './gRPC-node/server',
+		start: './gRPC-node/client',
 	},
 
 	{

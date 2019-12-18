@@ -2,7 +2,11 @@
 const dnode = require('dnode');
 
 const server = dnode(function (remote, conn) {
-	this.zing = function (n, cb) { cb(n * 100) };
+	this.sayHello = function (username, cb) {
+		username = username || 'world';
+		cb('Hello ' + username);
+	};
 });
 
 server.listen(7070);
+console.log(`Service is running on port 7070...`);

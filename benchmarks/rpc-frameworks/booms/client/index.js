@@ -2,9 +2,10 @@
 const services = require('./lib/boomsClient');
 
 const main = async () => {
-	const {ben} = await services();
-	const result = await ben.test();
-	// console.log(result);
+	const {s1} = await services();
+	const result = await s1.sayHello();
+	// console.log('Greeting: ' + result);
 };
 
 module.exports = main;
+// main();

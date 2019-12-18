@@ -1,25 +1,19 @@
 
 const socket = require('socket.io-client')('http://localhost:3000');
 
-socket.on('connect', () => {
-	// console.log('connected');
-});
-
-socket.on('disconnect', () => {});
-
-const foo = async (...args) => {
+const sayHello = async (...args) => {
 	return new Promise(resolve => {
-		socket.once('sayHi:ok', (result) => {
+		socket.once('sayHello:ok', (result) => {
 			resolve(result);
 		});
 
-		socket.emit('sayHi', ...args);
+		socket.emit('sayHello', ...args);
 	})
 };
 
-const main = async (times = 0) => {
-	const result = await foo('hello', 'world');
-	times <= 10 && console.log(result);
+const main = async () => {
+	const result = await sayHello();
+	// console.log('Greeting:', result);
 };
 
 module.exports = main;
