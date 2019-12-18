@@ -13,7 +13,7 @@ npm install benchmark-easy --save
 
 ### .start()
 
-See [example](./benchmark/rpc-frameworks/booms/index.js) to learn more.
+Create a file like below and run it:
 
 ```js
 const be = require('benchmark-easy')();
@@ -47,14 +47,14 @@ Average: 0.27 seconds, 4144819 times/sec.
 
 ### .before()
 
-Run some script(s) before do .start(). See [example](./benchmark/rpc-frameworks/booms/index.js) to learn more.
+Run some script(s) before do .start(). See [this file](./benchmark/rpc-frameworks/booms/index.js) to learn more.
 
 ```js
 // Run a script
 be.before('/path/to/server.js');
 be.start(...);
 ```
-
+Or
 ```js
 // Run several scripts
 be.before(
@@ -66,60 +66,37 @@ be.start(...);
 
 ### .compare()
 
-See [example](./benchmark/rpc-frameworks/index.js) to learn more.
-
+See "[./benchmark/rpc-frameworks/index.js](./benchmark/rpc-frameworks/index.js)" to learn more.
 ```js
 const be = require('benchmark-easy')();
 const times = 1000;
 
 be.compare([
-	{
-		name: 'booms',
-		before: './booms/service',
-		start: './booms/client',
-	},
+    {
+        name: 'booms',
+        before: './booms/server',
+        start: './booms/client',
+    },
 
-	{
-		name: 'gRPC-node',
-		before: './gRPC-node/greeter_server',
-		start: './gRPC-node/greeter_client',
-	},
+    {
+        name: 'gRPC-node',
+        before: './gRPC-node/server',
+        start: './gRPC-node/client',
+    },
 
-	{
-		name: 'socket.io',
-		before: './socket.io/server',
-		start: './socket.io/client',
-	},
-
-	{
-		name: 'dnode',
-		before: './dnode/server',
-		start: './dnode/client',
-	}
-
+    ...
 ], times);
 ```
 
-Results
-```sh
-...
-========================================
-Results
-========================================
-gRPC-node 2844 times/sec
-booms     2684 times/sec
-dnode     792  times/sec
-socket.io 786  times/sec
-========================================
-```
+## RPC framework PK
 
-## Frameworks PK
-
-RPC frameworks
-
+Run
 ```sh
 node ./benchmark/rpc-frameworks
+```
 
+Results
+```sh
 ...
 ========================================
 Results
