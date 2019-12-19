@@ -13,7 +13,7 @@ npm install beasy --save
 
 ### .start()
 
-Create a file like below and run it. See [example](./examples/#start/index.js)
+Create a file like below and run it. See [example](./examples/start/index.js)
 
 ```js
 const be = require('beasy')();
@@ -54,7 +54,7 @@ V8 6.8.275.32-node.54
 
 ### .before()
 
-Run some script(s) before do .start(). See [example](./examples/#before/index.js)
+Run some script(s) before do .start(). See [example](./examples/before/index.js)
 
 ```js
 // Run a script
@@ -73,7 +73,7 @@ be.start(...);
 
 ### .compare()
 
-Run a set of scripts and compare the results. See [example](./examples/#compare/index.js)
+Run a set of scripts and compare the results. See [example](./examples/compare/index.js)
 
 ```js
 const be = require('beasy')();
