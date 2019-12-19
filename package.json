@@ -1,6 +1,6 @@
 {
   "name": "beasy",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "An easy tools for benchmark testing for Node.js",
   "main": "index.js",
   "scripts": {
