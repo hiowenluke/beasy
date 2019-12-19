@@ -1,5 +1,5 @@
 {
-  "name": "benchmark-easy",
+  "name": "beasy",
   "version": "0.5.0",
   "description": "An easy tools for benchmark testing for Node.js",
   "main": "index.js",
@@ -11,23 +11,20 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/hiowenluke/benchmark-easy.git"
+    "url": "git+https://github.com/hiowenluke/beasy.git"
   },
   "bugs": {
-    "url": "https://github.com/hiowenluke/benchmark-easy/issues"
+    "url": "https://github.com/hiowenluke/beasy/issues"
   },
-  "homepage": "https://github.com/hiowenluke/benchmark-easy#readme",
+  "homepage": "https://github.com/hiowenluke/beasy#readme",
   "dependencies": {
     "caller": "^1.0.1",
     "cli-table": "^0.3.1",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "macos-release": "^2.3.0",
+    "os-name": "^3.1.0"
   },
   "devDependencies": {
-    "@grpc/proto-loader": "^0.5.3",
-    "dnode": "^1.2.2",
-    "booms": "^1.2.9",
-    "grpc": "^1.24.2",
-    "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0"
+    "booms": "^1.3.3"
   }
 }
