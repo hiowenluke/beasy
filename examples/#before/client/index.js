@@ -1,8 +1,8 @@
 
-const services = require('./lib/boomsClient');
+const servers = require('./boomsServers');
 
 const main = async () => {
-	const {s1} = await services();
+	const {s1} = await servers('s1');
 	const result = await s1.sayHello();
 	// console.log('Greeting: ' + result);
 };

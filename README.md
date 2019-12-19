@@ -1,22 +1,22 @@
 
-# Benchmark-Easy
+# Beasy
 
 An easy tools for benchmark testing for [Node.js](https://nodejs.org).
 
-## Installation
+## Install
 
 ```sh
-npm install benchmark-easy --save
+npm install beasy --save
 ```
 
 ## Usage
 
 ### .start()
 
-Create a file like below and run it:
+Create a file like below and run it. See [example](./examples/#start/index.js)
 
 ```js
-const be = require('benchmark-easy')();
+const be = require('beasy')();
 const times = 1000000;
 
 const main = async () => {
@@ -42,12 +42,19 @@ Run #9: 0.171 seconds, 5847953 times/sec.
 Run #10: 0.208 seconds, 4807692 times/sec.
 Done.
 Average: 0.27 seconds, 4144819 times/sec.
+----------------------------------------
+Platform info:
+macOS Mojave 10.14 x64
+Intel(R) Core(TM) i7-4558U CPU @ 2.80GHz x 4
+Total Memory 16 GB
+Node.js v10.16.3
+V8 6.8.275.32-node.54
 ```
 
 
 ### .before()
 
-Run some script(s) before do .start(). See [this file](./benchmark/rpc-frameworks/booms/index.js) to learn more.
+Run some script(s) before do .start(). See [example](./examples/#before/index.js)
 
 ```js
 // Run a script
@@ -66,46 +73,34 @@ be.start(...);
 
 ### .compare()
 
-See "[./benchmark/rpc-frameworks/index.js](./benchmark/rpc-frameworks/index.js)" to learn more.
+Run a set of scripts and compare the results. See [example](./examples/#compare/index.js)
+
 ```js
-const be = require('benchmark-easy')();
-const times = 1000;
+const be = require('beasy')();
+const baseTimes = 100000; // the run times in scripts. the default value is 1
+const times = 10;
 
 be.compare([
-    {
-        name: 'booms',
-        before: './booms/server',
-        start: './booms/client',
-    },
-
-    {
-        name: 'gRPC-node',
-        before: './gRPC-node/server',
-        start: './gRPC-node/client',
-    },
-
-    ...
-], times);
+	'for-loop',
+	'forEach',
+], times, baseTimes);
 ```
 
-## RPC framework PK
-
-Run
-```sh
-node ./benchmark/rpc-frameworks
-```
-
-Results
+Compare results
 ```sh
 ...
 ========================================
 Results
 ========================================
-gRPC-node 2844 times/sec
-booms     2684 times/sec
-dnode     792  times/sec
-socket.io 786  times/sec
+for-loop 30410000 times/sec
+forEach  17450000 times/sec
 ========================================
+Platform info:
+macOS Mojave 10.14 x64
+Intel(R) Core(TM) i7-4558U CPU @ 2.80GHz x 4
+Total Memory 16 GB
+Node.js v10.16.3
+V8 6.8.275.32-node.54
 ```
 
 

@@ -1,6 +1,6 @@
 
+const be = require('../..')();
 const fn = require('./client');
-const be = require('../../..')();
 
 be.before('./server');
-be.start(fn, 2);
+be.start(fn, 10000);

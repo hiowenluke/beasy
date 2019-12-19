@@ -1,6 +1,6 @@
 
-const be = require('..')();
-const times = 1000000;
+const be = require('../..')();
+const times = 100000;
 
 const main = async () => {
 	// do something

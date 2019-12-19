@@ -3,8 +3,10 @@ const spawn = require('child_process').spawn;
 const caller = require('caller');
 const path = require('path');
 const Table = require('cli-table');
+const myOs = require('./os');
 
 let cps = [];
+let baseTimes = 1;
 
 let isDidBefore;
 let isCompare;
@@ -73,11 +75,21 @@ const print = {
 };
 
 const me = {
-	async compare(defs, times, runs) {
+	async compare(defs, times, bTimes = 1, runs) {
+		if (!defs.length) return;
+
 		const pathToCaller = caller();
 		const root = path.resolve(pathToCaller, '..');
 
+		baseTimes = bTimes;
 		isCompare = 1;
+
+		// ['for-loop'] => [{name: 'for-loop', start: './for-loop'}]
+		if (typeof defs[0] === 'string') {
+			defs = defs.map(item => {
+				return {name: item, start: './' + item}
+			});
+		}
 
 		const results = [];
 		for (let i = 0; i < defs.length; i ++) {
@@ -86,14 +98,16 @@ const me = {
 
 			print.title(name);
 
-			let scripts = Array.isArray(before) ? before : [before];
+			if (before) {
+				let beforeScripts = Array.isArray(before) ? before : [before];
 
-			// Convert the relative path of script to absolute path
-			scripts = scripts.map(script =>
-				script.substr(0, 1) === '/' ? script : path.resolve(root, script)
-			);
+				// Convert the relative path of script to absolute path
+				beforeScripts = beforeScripts.map(script =>
+					script.substr(0, 1) === '/' ? script : path.resolve(root, script)
+				);
 
-			this.before(...scripts);
+				this.before(...beforeScripts);
+			}
 
 			let fn = start;
 			if (typeof fn === 'string') {
@@ -115,6 +129,7 @@ const me = {
 		results.sort(compare("avgRate"));
 		print.table('Results', results);
 
+		console.log(myOs.getOSInfo());
 		process.exit();
 	},
 
@@ -138,7 +153,10 @@ const me = {
 		isDidBefore = 1;
 	},
 
-	async start(func, times = 100, runs = 10) {
+	async start(func, times, runs) {
+		times = times || 100;
+		runs = runs || 10;
+
 		try {
 
 			// Waiting for the scripts starting
@@ -151,7 +169,9 @@ const me = {
 
 			for (let i = 0; i < runs; i ++) {
 				const result = await this.runOnce(func, times);
-				const {during, rate} = result;
+				let {during, rate} = result;
+				rate *= baseTimes;
+
 				console.log(`Run #${i + 1}: ${during} seconds, ${rate} times/sec`);
 
 				duringArr.push(during);
@@ -170,6 +190,8 @@ const me = {
 				return {avgDuring, avgRate};
 			}
 			else {
+				print.breakLine();
+				console.log(myOs.getOSInfo());
 				process.exit();
 			}
 		}
