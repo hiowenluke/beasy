@@ -1,8 +1,7 @@
 
-const servers = require('./boomsServers');
+const {s1} = require('booms/services');
 
 const main = async () => {
-	const {s1} = await servers('s1');
 	const result = await s1.sayHello();
 	// console.log('Greeting: ' + result);
 };
