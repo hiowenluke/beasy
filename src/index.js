@@ -7,6 +7,7 @@ const myOs = require('./os');
 
 let cps = [];
 let baseTimes = 1;
+let waitTime = 3; // seconds
 
 let isDidBefore;
 let isCompare;
@@ -17,6 +18,11 @@ const wait = (ms = 1000) => {
 			resolve();
 		}, ms);
 	});
+};
+
+const sleep = (seconds) => {
+	var waitTill = new Date(new Date().getTime() + seconds * 1000);
+	while(waitTill > new Date()){}
 };
 
 const killByPid = (pid) => {
@@ -75,7 +81,7 @@ const print = {
 };
 
 const me = {
-	async compare(defs, times, bTimes = 1, runs) {
+	async compare(defs, times, bTimes = 1, runs, _waitTime) {
 		if (!defs.length) return;
 
 		const pathToCaller = caller();
@@ -83,6 +89,7 @@ const me = {
 
 		baseTimes = bTimes;
 		isCompare = 1;
+		waitTime = _waitTime;
 
 		// ['for-loop'] => [{name: 'for-loop', start: './for-loop'}]
 		if (typeof defs[0] === 'string') {
@@ -135,6 +142,13 @@ const me = {
 
 	before(...scripts) {
 		if (!scripts.length) return;
+
+		const _waitTime = scripts[scripts.length - 1];
+		if (typeof _waitTime === 'number') {
+			scripts.pop();
+			waitTime = _waitTime;
+		}
+
 		console.log(`Running scripts...`);
 
 		const pathToCaller = caller();
@@ -151,6 +165,8 @@ const me = {
 		}
 
 		isDidBefore = 1;
+
+		sleep(waitTime);
 	},
 
 	async start(func, times, runs) {
